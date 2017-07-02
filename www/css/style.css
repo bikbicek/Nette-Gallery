@@ -1,0 +1,13 @@
+#container {
+    position: relative;
+}
+
+#main_title div {}
+
+#main_content {
+    height: 1000px;
+}
+
+#drop_down{
+    min-width: 200px;
+}

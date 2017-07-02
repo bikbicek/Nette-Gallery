@@ -1,0 +1,31 @@
+{block navbar}
+{if $user->loggedIn}
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#">{$user->id}</a></li>
+  <li class="divider"></li>
+  <li><a n:href="Gallery:upload">Nahrát fotografii</a></li>
+  <li><a n:href="Gallery:myGallery">Moje fotografie</a></li>
+  <a n:href="Sign:out"  class="waves-effect waves-light btn">Odhlásit se</a>
+{/if}
+</ul>
+<nav>
+    <div class="nav-wrapper">
+        <a n:href="Homepage:default" class="brand-logo">Moje Galerie</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {if !$user->loggedIn}
+                    <li><a n:href="Sign:in" class="waves-effect waves-light btn">Přihlásit se</a></li>
+                {else}
+                    <li><a id="drop_down" class="dropdown-button" data-activates="dropdown1">Přihlášen jako <b>{$user->id}</b></a></li>
+                {/if}
+                <li n:class="$presenter->isLinkCurrent('Homepage:') ? active">
+                    <a n:href="Homepage:default">Hlavní stránka</a>
+                </li>
+                <li n:class="$presenter->isLinkCurrent('Gallery:') ? active">
+                    <a n:href="Gallery:default">Galerie</a>
+                </li>
+                <li>
+                    <a href="#">Kontakty</a>
+                </li>
+            </ul>
+    </div>
+</nav>

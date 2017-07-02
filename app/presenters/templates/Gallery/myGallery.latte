@@ -1,0 +1,23 @@
+{block content}
+
+<div class="row">
+    {foreach $images as $image}
+    {if $image->path != ""}
+    <div class="col s3">
+        <div class="card">
+            <div class="card-image">
+                <a n:href="Gallery:delete $image->id" class="btn-floating waves-effect waves-light red" style="position:absolute; margin: 4px;"><i class="material-icons">clear</i></a>
+                <img src="{$basePath}/userImages/{$image->path}.jpg">
+                <span class="card-title">{$image->title}</span>
+            </div>
+            <div class="card-content">
+                <p>{$image->info}</p>
+            </div>
+            <div class="card-action">
+                <a n:href="Gallery:showImage $image->id">Zobrazit fotografii</a>
+            </div>
+        </div>
+    </div>
+    {/if}
+    {/foreach}
+</div>
