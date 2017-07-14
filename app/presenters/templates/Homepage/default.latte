@@ -3,7 +3,7 @@
     <div class="parallax-container">
         <div class="section no-pad-bot">
             <div class="container">
-                <br><br>
+                <br><br><br>
                 <h1 class="center white-text">Moje Galerie</h1>
                 <div class="row center">
                     <h5 class="header white-text col s12">Nahrajte, sdílejte, prohlížejte si plno originálních fotografií</h5>
@@ -12,13 +12,32 @@
         </div>
         <div class="parallax"><img src="imgs/main_view.jpg"></div>
     </div>
-    <div class="section white">
-        <div class="row container">
+    <div class="section blue-grey lighten-5">
+        <div class="row container center-align">
             <h2 class="header">Vítejte!</h2>
             <p class="grey-text text-darken-3 lighten-3">Vítejte v mé webové galerii. Zde můžete nalézt mé fotografie, které jsem v průběhu nafotil a upravil.</p>
+            <div class="carousel">
+                <a class="carousel-item"><img src="imgs/slide1.jpg"></a>
+                <a class="carousel-item"><img src="imgs/slide2.jpg"></a>
+                <a class="carousel-item"><img src="imgs/slide3.jpg"></a>
+                <a class="carousel-item"><img src="imgs/slide4.jpg"></a>
+                <a class="carousel-item"><img src="imgs/slide5.jpg"></a>
+            </div>
         </div>
     </div>
 </div>
 <div id="main_content">
-
+    <div class="parallax-container">
+        <div class="parallax"><img src="imgs/main_view1.jpg"></div>
+    </div>
 </div>
+
+<script n:syntax="off">
+    $(document).ready(function() {
+        $('.parallax').parallax();
+        $('.carousel').carousel({shift: 50});
+    });
+    
+    Materialize.toast(document.getElementsByClassName("flash")[0], 5000);
+
+</script>

@@ -3,10 +3,10 @@
 <div class="row">
     {foreach $images as $image}
     {if $image->path != ""}
-    <div class="col s3">
+    <div class="col m3">
         <div class="card">
             <div class="card-image">
-                <img src="{$basePath}/userImages/{$image->path}.jpg">
+                <img class="materialboxed" src="{$basePath}/userImages/{$image->path}.jpg">
                 <span class="card-title">{$image->title}</span>
             </div>
             <div class="card-content">
@@ -20,3 +20,9 @@
     {/if}
     {/foreach}
 </div>
+
+<script>
+  $(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+</script>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>Galerie</title>
     <link rel="shortcut icon" href="{$basePath}/imgs/znak.png" />
@@ -13,10 +13,11 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{$basePath}/css/materialize.min.css" media="screen,projection" />
     <link href="{$basePath}/css/style.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/materialize.min.js"></script>
 </head>
 
 <body>
-    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
     {include navbar.latte}
     
@@ -25,14 +26,13 @@
     {block scripts}
     <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
     {/block}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="{$basePath}/js/materialize.min.js"></script>
+    
+    {if isset($message)}
     <script>
-        $(document).ready(function() {
-            $('.parallax').parallax();
-        });
-
+    
     </script>
+    {/if}
+
 </body>
 
 </html>

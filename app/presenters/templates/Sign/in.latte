@@ -1,4 +1,22 @@
 {block content}
-<h1 n:block=title>Přihlášení</h1>
+<section id="signInContainer" class="row">
+    <div class="col m4 offset-m4 s12">
+        <h1 class="teal-text text-lighten-2">Přihlášení</h1>
 
-{control signInForm}
+        <form n:name=signInForm class="form">
+            <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input id="username" n:name=username class="validate">
+                <label for="username" data-error="wrong" data-success="right">Uživatelské jméno</label>
+            </div>
+            <div class="input-field">
+                <i class="material-icons prefix">vpn_key</i>
+                <input id="passwor" n:name=password class="validate">
+                <label for="username" data-error="wrong" data-success="right">Heslo</label>
+            </div>    
+            <div class="file-field input-field">
+                <input class="btn" n:name=send>
+            </div>
+        </form>
+    </div>
+</section>

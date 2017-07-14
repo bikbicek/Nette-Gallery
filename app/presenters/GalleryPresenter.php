@@ -32,10 +32,12 @@ class GalleryPresenter extends Nette\Application\UI\Presenter
             $form->addUpload('image')
             ->setRequired(TRUE)
             ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
-            $form->addText('title');
-            $form->addText('info');
+            $form->addText('title')
+                ->setHtmlAttribute('autocomplete','off');
+            $form->addText('info')
+                ->setHtmlAttribute('autocomplete','off');
             
-            $form->addSubmit('login', 'Nahrát fotografii');
+            $form->addSubmit('upload', 'Nahrát fotografii');
             $form->onSuccess[] = [$this, 'uploadFormSucceeded'];
             return $form;
         }
@@ -84,8 +86,7 @@ class GalleryPresenter extends Nette\Application\UI\Presenter
         
         $image = Image::fromFile($image);
         $image->save('userImages/'.$id_name.'.jpg');
-        $this->flashMessage('Obrázek byl úspěšně nahrán');
-        $this->redirect('Homepage:');
+        $this->redirect('Gallery:myGallery');
     }
     
     public function check()
