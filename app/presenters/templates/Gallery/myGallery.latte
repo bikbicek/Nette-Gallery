@@ -7,12 +7,14 @@
         <div class="card">
             <div class="card-image">
                 <a n:href="Gallery:delete $image->id" class="btn-floating waves-effect waves-light red" style="position:absolute; margin: 4px;"><i class="material-icons">clear</i></a>
-                <img class="materialboxed" src="{$basePath}/userImages/{$image->path}.jpg">
+                <img class="materialboxed" src="image/{$image->id}">
                 <span class="card-title">{$image->title}</span>
             </div>
+            {if $image->info}
             <div class="card-content">
                 <p>{$image->info}</p>
             </div>
+            {/if}
             <div class="card-action">
                 <a n:href="Gallery:showImage $image->id">Zobrazit fotografii</a>
             </div>

@@ -6,12 +6,14 @@
     <div class="col m3">
         <div class="card">
             <div class="card-image">
-                <img class="materialboxed" src="{$basePath}/userImages/{$image->path}.jpg">
+                <img class="materialboxed" src="image/{$image->id}">
                 <span class="card-title">{$image->title}</span>
             </div>
+            {if $image->info}
             <div class="card-content">
                 <p>{$image->info}</p>
             </div>
+            {/if}
             <div class="card-action">
                 <a n:href="Gallery:showImage $image->id">Zobrazit fotografii</a>
             </div>

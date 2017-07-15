@@ -1,24 +1,35 @@
 {block content}
 <section id="upload-container">
-    <form n:name=uploadForm class="form">
-        <div class="input-field">
-            <input n:name=title id="title">
+    <form n:name=uploadForm class="form row">
+        <div class="input-field col m3 offset-m2">
+            <input n:name=title id="title" autocomplete="off">
             <label for="title">Název</label>
         </div>
-        <div class="input-field col s12">
-            <textarea id="info" class="materialize-textarea"></textarea>
+        <div class="switch col m1">
+            <label>
+              Privátní
+              <input checked n:name=public>
+              <span class="lever"></span>
+              Veřejné
+            </label>
+        </div>
+        <div class="col m4">
+            
+        </div>
+        <div class="input-field col m8 offset-m2">
+            <textarea id="info" class="materialize-textarea" autocomplete="off"></textarea>
             <label for="info">Informace</label>
         </div>
-        <div class="file-field input-field">
+        <div class="file-field input-field col m8 offset-m2">
             <div class="btn">
-                <span>Fotografie</span>
-                <input type="file" n:name=image>
+                <span>Vybrat foto</span>
+                <input n:name=image autocomplete="off">
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
             </div>
         </div>
-        <div class="file-field input-field">
+        <div class="file-field input-field col offset-m2">
             <input class="btn" n:name=upload>
         </div>
     </form>

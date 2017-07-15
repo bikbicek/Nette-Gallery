@@ -19,7 +19,7 @@ class GalleryPresenter extends Nette\Application\UI\Presenter
 
     public function renderDefault()
     {
-        $this->template->images = $this->database->table('images');
+        $this->template->images = $this->database->table('images')->where('public', True);
     }
     
     public function createComponentUploadForm()
@@ -32,10 +32,10 @@ class GalleryPresenter extends Nette\Application\UI\Presenter
             $form->addUpload('image')
             ->setRequired(TRUE)
             ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
-            $form->addText('title')
-                ->setHtmlAttribute('autocomplete','off');
-            $form->addText('info')
-                ->setHtmlAttribute('autocomplete','off');
+            
+            $form->addText('title');
+            $form->addText('info');
+            $form->addCheckbox('public');
             
             $form->addSubmit('upload', 'Nahrát fotografii');
             $form->onSuccess[] = [$this, 'uploadFormSucceeded'];
@@ -58,7 +58,12 @@ class GalleryPresenter extends Nette\Application\UI\Presenter
         $image = $this->database->table("images")->get($id);
         if(!$image){$this->error('Tato stránka neexistuje');}
         else{
-            $this->template->image = $image;
+            if($image->public == True || ( $this->getUser()->isLoggedIn() && $image->user_id == $this->getUser()->id)){
+                $this->template->image = $image;
+            }
+            else{
+                $this->error('Nemáte přístup k této stránce');
+            }
         }
     }
     
@@ -66,7 +71,8 @@ class GalleryPresenter extends Nette\Application\UI\Presenter
     {
         $image = $this->database->table("images")->get($id);
         if($image->user_id == $this->getUser()->id){
-            unlink('userImages/'.$image->path.'.jpg');
+            $path = __DIR__.'/../images/'.$image->path.'.jpg';
+            unlink($path);
             $image->delete();
             $this->redirect("my-gallery");
         }
@@ -85,11 +91,21 @@ class GalleryPresenter extends Nette\Application\UI\Presenter
         $this->database->table('images')->insert($values);
         
         $image = Image::fromFile($image);
-        $image->save('userImages/'.$id_name.'.jpg');
+        $image->save(__DIR__.'/../images/'.$id_name.'.jpg');
         $this->redirect('Gallery:myGallery');
     }
     
-    public function check()
-    {
+    public function renderImage($id){
+        $image = $this->database->table("images")->get($id);
+        if($image){
+        
+            if($image->public == True || ( $this->getUser()->isLoggedIn() && $image->user_id == $this->getUser()->id)){
+                $image = Image::fromFile(__DIR__.'/../images/'.$image->path.'.jpg');
+                $image->send();
+                return;
+            }
+            
+        }
+        else{$this->error('Tato stránka neexistuje');}
     }
 }
